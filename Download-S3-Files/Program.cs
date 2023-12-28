@@ -14,10 +14,38 @@ namespace Download_S3_Files
         private const string AccessKey = "";
         private const string SecretKey = "";
         private const string AwsRegion = "";
+
         static void Main(string[] args)
         {
-            var fileKey = "";
-            DownloadFileAsyncS(fileKey).Wait();
+            var filekey = "";
+            switch (args[0])
+            {
+                case "1":
+                    filekey = ""; // 18MB
+                    break;
+                case "2":
+                    filekey = ""; // 50MB
+                    break;
+                case "3":
+                    filekey = ""; // 143MB
+                    break;
+                case "4":
+                    filekey = ""; // 200 MB
+                    break;
+                case "5":
+                    filekey = ""; // 300 MB
+                    break;
+            }
+
+            switch (args[1])
+            {
+                case "p":
+                    DownloadFileAsyncP(filekey).Wait();
+                    break;
+                case "s":
+                    DownloadFileAsyncS(filekey).Wait();
+                    break;
+            }
         }
 
         private static AmazonS3Client CreateS3Client()
@@ -64,7 +92,8 @@ namespace Download_S3_Files
             }
             catch (AmazonS3Exception ex)
             {
-                return (null, false);
+                Console.WriteLine(ex.Message);
+                return (new MemoryStream(), false);
             }
         }
 
@@ -128,7 +157,8 @@ namespace Download_S3_Files
             }
             catch (AmazonS3Exception ex)
             {
-                return (null, false);
+                Console.WriteLine(ex.Message);
+                return (new MemoryStream(), false);
             }
         }
     }
