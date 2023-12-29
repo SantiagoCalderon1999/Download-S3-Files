@@ -4,7 +4,7 @@ num_runs=20
 command_to_run="dotnet run"
 total_time=0
 
-cd ~/Download-S3-Files
+cd ./Download-S3-Files
 
 # Run the command multiple times
 for downloadType in s p; do
